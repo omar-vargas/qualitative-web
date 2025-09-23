@@ -1,24 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import Sidebar from './components/Sidebar';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import DataPage from './pages/DataPage';
+import MultiFileUpload from './pages/MultiFileUpload';
+import LoginPage from './pages/LoginPage';
+import Step1Upload from './pages/Step1Upload.jsx';
+import { useSession } from './context/SessionContext';
+import Step2Generar from './pages/Step2Generar';
+import Step3Feedback from './pages/Step3Feedback'
+import TextHighlighter from './pages/TextHighlighter.jsx';
+import ResaltadorPorArchivo from './pages/ResaltadorporArchivo.jsx';
+import TutorialInteractivo from './pages/TutorialInteractivo.jsx';
+import Home from './pages/Home';
+import Summary from './pages/Summary';
+import EmbeddingsView from './pages/EmbeddingsView';
+import { Box } from '@mui/material';
 
 function App() {
+  const { session } = useSession();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box sx={{ display: 'flex' }}>
+      {session && <Sidebar />}
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Routes>
+          <Route path="/" element={session ? <Navigate to="/home" /> : <LoginPage />} />
+          {session && (
+            <>
+              <Route path="/home" element={<Home />} />
+              <Route path="/step1" element={<Step1Upload />} />
+              <Route path="/step3" element={<Step3Feedback />} />
+              <Route path="/step2" element={<Step2Generar />} />
+              <Route path="/summary" element={<Summary />} />
+              <Route path="/embeddings" element={<EmbeddingsView />} />
+              <Route path="/data" element={<MultiFileUpload />} />
+              <Route path="/label" element={<ResaltadorPorArchivo />} />
+              <Route path="/tutorial" element={<TutorialInteractivo />} />
+            </>
+          )}
+          {!session && <Route path="*" element={<Navigate to="/" />} />}
+        </Routes>
+      </Box>
+    </Box>
   );
 }
 
