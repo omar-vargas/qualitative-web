@@ -47,7 +47,7 @@ function ResaltadorPorArchivo() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalSegments, setTotalSegments] = useState(0);
-
+  const API_URL = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     if (session) {
       loadCodedSegments();

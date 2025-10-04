@@ -45,7 +45,7 @@ const Step3Feedback = () => {
   const [feedbackRound, setFeedbackRound] = useState(1);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
-
+  const API_URL = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     const storedPreguntas = localStorage.getItem("preguntas");
     const preguntasExist = storedPreguntas && JSON.parse(storedPreguntas).length > 0;

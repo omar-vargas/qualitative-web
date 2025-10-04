@@ -29,7 +29,7 @@ function Step2Generar() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [progress, setProgress] = useState(0);
-
+  const API_URL = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     const stored = localStorage.getItem('preguntas');
     if (stored) {
