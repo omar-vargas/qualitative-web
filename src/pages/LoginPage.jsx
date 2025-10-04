@@ -25,6 +25,7 @@ function LoginPage() {
   const [error, setError] = useState('');
   const { setSession } = useSession();
   const navigate = useNavigate();
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -32,7 +33,7 @@ function LoginPage() {
     setError('');
 
     try {
-      const res = await fetch('http://localhost:8000/login/', {
+      const res = await fetch(`${API_URL}/login/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
