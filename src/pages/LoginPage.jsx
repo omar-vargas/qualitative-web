@@ -32,7 +32,7 @@ function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError('');
-
+    console.log(API_URL)
     try {
       const res = await fetch(`${API_URL}/login/`, {
         method: 'POST',
