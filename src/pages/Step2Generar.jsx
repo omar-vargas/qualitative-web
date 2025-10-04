@@ -19,6 +19,7 @@ import {
 } from '@mui/material';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import PsychologyIcon from '@mui/icons-material/Psychology';
+import HyperparametersSettings from '../components/HyperparametersSettings';
 
 function Step2Generar() {
   const { session } = useSession();
@@ -29,6 +30,7 @@ function Step2Generar() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [progress, setProgress] = useState(0);
+  const [hyperparams, setHyperparams] = useState({});
   const API_URL = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     const stored = localStorage.getItem('preguntas');
@@ -75,7 +77,12 @@ function Step2Generar() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             preguntas: preguntas.join(", "),
-            session_id: session.session_id
+            session_id: session.session_id,
+            temperature: hyperparams.temperature || 0.7,
+            max_tokens: hyperparams.maxTokens || 1000,
+            top_p: hyperparams.topP || 1.0,
+            frequency_penalty: hyperparams.frequencyPenalty || 0.0,
+            presence_penalty: hyperparams.presencePenalty || 0.0
           })
         });
 
@@ -137,6 +144,8 @@ function Step2Generar() {
       <Typography variant="body1" sx={{ marginBottom: 3 }}>
         Basándonos en tus hipótesis, el agente de IA ha generado códigos iniciales para tu análisis cualitativo.
       </Typography>
+
+      <HyperparametersSettings onChange={setHyperparams} />
 
       <Grid container spacing={3}>
         <Grid item xs={12} md={6}>

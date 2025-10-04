@@ -22,6 +22,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DeleteIcon from '@mui/icons-material/Delete';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import CodeIcon from '@mui/icons-material/Code';
+import HyperparametersSettings from '../components/HyperparametersSettings';
 
 // Generate colors for codes dynamically
 const generateColorPalette = (codes) => {
@@ -47,6 +48,7 @@ function ResaltadorPorArchivo() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [totalSegments, setTotalSegments] = useState(0);
+  const [hyperparams, setHyperparams] = useState({});
   const API_URL = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     if (session) {
@@ -76,7 +78,12 @@ function ResaltadorPorArchivo() {
           session_id: session.session_id,
           codigos: codes,
           pagina: page,
-          por_pagina: 10  // Show 10 per page for better UX with 50 total
+          por_pagina: 10,  // Show 10 per page for better UX with 50 total
+          temperature: hyperparams.temperature || 0.7,
+          max_tokens: hyperparams.maxTokens || 1000,
+          top_p: hyperparams.topP || 1.0,
+          frequency_penalty: hyperparams.frequencyPenalty || 0.0,
+          presence_penalty: hyperparams.presencePenalty || 0.0
         })
       });
 
@@ -125,6 +132,8 @@ function ResaltadorPorArchivo() {
         Los segmentos de texto han sido automáticamente codificados con los códigos que aprobó.
         Se muestran hasta 50 segmentos representativos para análisis. Puede remover códigos de segmentos específicos si no son relevantes.
       </Typography>
+
+      <HyperparametersSettings onChange={setHyperparams} />
 
       <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
         <Button

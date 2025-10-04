@@ -30,6 +30,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
+import HyperparametersSettings from '../components/HyperparametersSettings';
 
 const colorMap = ["#00cc66", "#3399ff", "#ff9933", "#cc33cc", "#ff6666"];
 
@@ -45,6 +46,7 @@ const Step3Feedback = () => {
   const [feedbackRound, setFeedbackRound] = useState(1);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
+  const [hyperparams, setHyperparams] = useState({});
   const API_URL = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     const storedPreguntas = localStorage.getItem("preguntas");
@@ -112,6 +114,11 @@ const Step3Feedback = () => {
         nuevos_codigos: codes.map(c => c.text),
         feedback,
         session_id: session.session_id,
+        temperature: hyperparams.temperature || 0.7,
+        max_tokens: hyperparams.maxTokens || 1000,
+        top_p: hyperparams.topP || 1.0,
+        frequency_penalty: hyperparams.frequencyPenalty || 0.0,
+        presence_penalty: hyperparams.presencePenalty || 0.0
       };
 
       const response = await fetch(`${API_URL}/validar/`, {
@@ -172,6 +179,8 @@ const Step3Feedback = () => {
       <Typography variant="body1" sx={{ marginBottom: 3 }}>
         Revisa, edita y refina los códigos generados. Proporciona feedback al agente IA para mejorar los resultados.
       </Typography>
+
+      <HyperparametersSettings onChange={setHyperparams} />
 
       <Grid container spacing={3}>
         {preguntas.length > 0 ? (
