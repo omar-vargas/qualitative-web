@@ -25,7 +25,8 @@ function LoginPage() {
   const [error, setError] = useState('');
   const { setSession } = useSession();
   const navigate = useNavigate();
-  const API_URL = process.env.API_BASE;
+  const API_URL = process.env.REACT_APP_API_BASE;
+
 
   const handleLogin = async (e) => {
     e.preventDefault();
