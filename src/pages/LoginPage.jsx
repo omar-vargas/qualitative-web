@@ -32,7 +32,7 @@ function LoginPage() {
     setError('');
 
     try {
-      const res = await fetch('http://3.145.213.75/login/', {
+      const res = await fetch('http://3.145.213.75:8000/login/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
