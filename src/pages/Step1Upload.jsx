@@ -88,7 +88,7 @@ function Step1Upload() {
       }
 
       // Guardar consolidado en el backend
-      const res = await fetch("http://localhost:8000/guardar_docs/", {
+      const res = await fetch(`${API_URL}/guardar_docs/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

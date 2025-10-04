@@ -114,7 +114,7 @@ const Step3Feedback = () => {
         session_id: session.session_id,
       };
 
-      const response = await fetch("http://localhost:8000/validar/", {
+      const response = await fetch(`${API_URL}/validar/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

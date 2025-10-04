@@ -70,7 +70,7 @@ function Step2Generar() {
       }, 200);
 
       try {
-        const response = await fetch("http://localhost:8000/generar/", {
+        const response = await fetch(`${API_URL}/generar/`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

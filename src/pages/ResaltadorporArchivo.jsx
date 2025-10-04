@@ -69,7 +69,7 @@ function ResaltadorPorArchivo() {
       const codes = JSON.parse(finalCodes);
 
       // Call backend to get coded segments (limited to 50 total)
-      const response = await fetch('http://localhost:8000/etiquetar/', {
+      const response = await fetch(`${API_URL}:8000/etiquetar/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
