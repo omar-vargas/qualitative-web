@@ -91,20 +91,14 @@ function Step2Generar() {
 
         if (response.ok) {
           const json = await response.json();
-          const raw = json[0];
-          const safeString = raw.replace(/'/g, '"');
-          const parsed = JSON.parse(safeString);
-          const lista = parsed[0].split(',').map(c => c.trim()).filter(Boolean);
+          const lista = json[0]; // Already an array
 
           setCodigos(lista);
           localStorage.setItem('codigos', JSON.stringify(lista));
 
           // Check if backend also returned codes without hypotheses
           if (json.length > 1 && json[1]) {
-            const rawSinHipotesis = json[1];
-            const safeStringSinHipotesis = rawSinHipotesis.replace(/'/g, '"');
-            const parsedSinHipotesis = JSON.parse(safeStringSinHipotesis);
-            const listaSinHipotesis = parsedSinHipotesis[0].split(',').map(c => c.trim()).filter(Boolean);
+            const listaSinHipotesis = json[1]; // Already an array
 
             setCodigosSinHipotesis(listaSinHipotesis);
             localStorage.setItem('codigos_sin_hipotesis', JSON.stringify(listaSinHipotesis));
@@ -148,7 +142,7 @@ function Step2Generar() {
       <HyperparametersSettings onChange={setHyperparams} />
 
       <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>
@@ -166,7 +160,7 @@ function Step2Generar() {
           </Card>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        <Grid size={{ xs: 12, md: 6 }}>
           <Card>
             <CardContent>
               <Typography variant="h6" gutterBottom>

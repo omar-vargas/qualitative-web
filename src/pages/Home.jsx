@@ -62,7 +62,7 @@ function Home() {
         🧪 Evaluación Cualitativa Asistida por Agentes
       </Typography>
       <Typography variant="h6" align="center" sx={{ marginBottom: 4, color: '#555' }}>
-        Una herramienta inspirada en Atlas Ti para análisis cualitativo de datos textuales, potenciada por inteligencia artificial.
+        Una herramienta  para análisis cualitativo de datos textuales, potenciada por Agentes
       </Typography>
 
       <Box sx={{ textAlign: 'center', marginBottom: 4 }}>

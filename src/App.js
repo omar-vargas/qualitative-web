@@ -33,7 +33,7 @@ function App() {
               <Route path="/step2" element={<Step2Generar />} />
               <Route path="/summary" element={<Summary />} />
               <Route path="/embeddings" element={<EmbeddingsView />} />
-              <Route path="/data" element={<MultiFileUpload />} />
+              <Route path="/data" element={<DataPage />} />
               <Route path="/label" element={<ResaltadorPorArchivo />} />
               <Route path="/tutorial" element={<TutorialInteractivo />} />
             </>

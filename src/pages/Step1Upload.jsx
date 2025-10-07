@@ -20,6 +20,7 @@ import {
 import UploadFileIcon from '@mui/icons-material/UploadFile';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { processFile, getSupportedFileTypes, getFileTypeDescription, validateFile } from '../utils/fileProcessor';
 
 function Step1Upload() {
   const { session } = useSession();
@@ -37,6 +38,22 @@ function Step1Upload() {
 
   const handleFilesChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
+
+    // Validate files
+    const invalidFiles = [];
+    selectedFiles.forEach(file => {
+      try {
+        validateFile(file);
+      } catch (error) {
+        invalidFiles.push(`${file.name}: ${error.message}`);
+      }
+    });
+
+    if (invalidFiles.length > 0) {
+      setError(`❌ Archivos inválidos:\n${invalidFiles.join('\n')}`);
+      return;
+    }
+
     setFiles(selectedFiles);
     setError('');
   };
@@ -65,7 +82,7 @@ function Step1Upload() {
 
   const handleSubmit = async () => {
     if (!files.length) {
-      setError("❗ Sube al menos un archivo .txt.");
+      setError("❗ Sube al menos un archivo de texto (PDF, DOCX, XLSX, TXT, etc.).");
       return;
     }
 
@@ -83,8 +100,12 @@ function Step1Upload() {
       // Consolidar archivos localmente
       let contenidoConsolidado = '';
       for (let i = 0; i < files.length; i++) {
-        const text = await files[i].text();
-        contenidoConsolidado += `\n\n-- Inicio del archivo ${i + 1} --\n\n${text}\n\n-- Fin del archivo ${i + 1} --\n\n`;
+        try {
+          const text = await processFile(files[i]);
+          contenidoConsolidado += `\n\n-- Inicio del archivo ${i + 1}: ${files[i].name} --\n\n${text}\n\n-- Fin del archivo ${i + 1}: ${files[i].name} --\n\n`;
+        } catch (error) {
+          throw new Error(`Error procesando ${files[i].name}: ${error.message}`);
+        }
       }
 
       // Guardar consolidado en el backend
@@ -127,7 +148,12 @@ function Step1Upload() {
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 <UploadFileIcon sx={{ mr: 1 }} />
-                Archivos de Texto
+                Archivos de Documentos
+              </Typography>
+              <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
+                Formatos soportados: DOCX, XLSX, XLS, TXT, MD, CSV (máx. 50MB por archivo)
+                <br />
+                <em>Nota: PDF no disponible temporalmente - convierta a DOCX o TXT</em>
               </Typography>
               <Button
                 variant="outlined"
@@ -135,10 +161,10 @@ function Step1Upload() {
                 fullWidth
                 sx={{ marginBottom: 2 }}
               >
-                Seleccionar archivos .txt
+                Seleccionar archivos
                 <input
                   type="file"
-                  accept=".txt"
+                  accept={getSupportedFileTypes()}
                   multiple
                   hidden
                   onChange={handleFilesChange}
@@ -164,7 +190,7 @@ function Step1Upload() {
                       >
                         <ListItemText
                           primary={file.name}
-                          secondary={`${(file.size / 1024).toFixed(2)} KB`}
+                          secondary={`${getFileTypeDescription(file.name)} • ${(file.size / 1024).toFixed(2)} KB`}
                           primaryTypographyProps={{ variant: 'body2' }}
                           secondaryTypographyProps={{ variant: 'caption' }}
                         />
