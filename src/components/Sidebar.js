@@ -61,7 +61,7 @@ function Sidebar() {
         <Box sx={{ display: 'flex', alignItems: 'center', padding: '8px', justifyContent: open ? 'space-between' : 'center' }}>
           {open && (
             <Typography variant="h6" sx={{ fontWeight: 'bold', color: '#1976d2' }}>
-              🧪 Evaluacion Cualitativa Asistida por Agentes
+              🧪 Qualicode  Evaluación Cualitativa Asistida por Agentes
             </Typography>
           )}
           <IconButton onClick={handleDrawerToggle}>

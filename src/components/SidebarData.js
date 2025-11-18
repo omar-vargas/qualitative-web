@@ -9,6 +9,8 @@ import EditIcon from '@mui/icons-material/Edit';
 import HelpIcon from '@mui/icons-material/Help';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
+import PollIcon from '@mui/icons-material/Poll';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 export const SidebarData = [
@@ -65,6 +67,18 @@ export const SidebarData = [
         icon: <ScatterPlotIcon />,
         link: "/embeddings",
         description: "Visualización semántica"
+    },
+    {
+        title: "Taxonomía",
+        icon: <AccountTreeIcon />,
+        link: "/taxonomy",
+        description: "Familias de códigos"
+    },
+    {
+        title: "Encuesta",
+        icon: <PollIcon />,
+        link: "/survey",
+        description: "Evaluación de la herramienta"
     },
     {
         title: "Cerrar Sesión",

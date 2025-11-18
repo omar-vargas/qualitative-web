@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+ import React, { useEffect, useState } from 'react';
 import { useSession } from '../context/SessionContext';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -18,6 +18,7 @@ import {
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import DownloadIcon from '@mui/icons-material/Download';
 import RefreshIcon from '@mui/icons-material/Refresh';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
 function Summary() {
   const { session } = useSession();
@@ -172,6 +173,14 @@ function Summary() {
             onClick={handleRestart}
           >
             Iniciar Nuevo Análisis
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<AccountTreeIcon />}
+            onClick={() => navigate("/taxonomy")}
+            sx={{ backgroundColor: '#1976d2' }}
+          >
+            Ver Taxonomía de Familias
           </Button>
           <Button
             variant="contained"
