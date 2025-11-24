@@ -11,6 +11,7 @@ import AssessmentIcon from '@mui/icons-material/Assessment';
 import ScatterPlotIcon from '@mui/icons-material/ScatterPlot';
 import PollIcon from '@mui/icons-material/Poll';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import CompareIcon from '@mui/icons-material/Compare';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 export const SidebarData = [
@@ -73,6 +74,12 @@ export const SidebarData = [
         icon: <AccountTreeIcon />,
         link: "/taxonomy",
         description: "Familias de códigos"
+    },
+    {
+        title: "Comparación Clustering",
+        icon: <CompareIcon />,
+        link: "/clustering-comparison",
+        description: "Comparar métodos de familias"
     },
     {
         title: "Encuesta",

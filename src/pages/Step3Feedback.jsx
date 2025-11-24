@@ -118,7 +118,8 @@ const Step3Feedback = () => {
         max_tokens: hyperparams.maxTokens || 1000,
         top_p: hyperparams.topP || 1.0,
         frequency_penalty: hyperparams.frequencyPenalty || 0.0,
-        presence_penalty: hyperparams.presencePenalty || 0.0
+        presence_penalty: hyperparams.presencePenalty || 0.0,
+        ...(hyperparams.numCodes && { num_codes: hyperparams.numCodes })
       };
 
       const response = await fetch(`${API_URL}/validar/`, {

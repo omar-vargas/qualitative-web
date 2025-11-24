@@ -24,6 +24,7 @@ const HyperparametersSettings = ({ onChange, initialValues = {} }) => {
     topP: initialValues.topP || 1.0,
     frequencyPenalty: initialValues.frequencyPenalty || 0.0,
     presencePenalty: initialValues.presencePenalty || 0.0,
+    numCodes: initialValues.numCodes || undefined,
     ...initialValues
   });
 
@@ -239,6 +240,28 @@ const HyperparametersSettings = ({ onChange, initialValues = {} }) => {
                 sx={{ width: 80 }}
               />
             </Box>
+          </Box>
+
+          {/* Num Codes */}
+          <Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+              <Typography variant="subtitle2">Número de Códigos (Opcional)</Typography>
+              <Tooltip title="Especifica el número exacto de códigos que debe generar la IA. Si no se especifica, la IA generará la cantidad relevante basada en los datos.">
+                <IconButton size="small">
+                  <InfoIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            </Box>
+            <TextField
+              type="number"
+              value={values.numCodes || ''}
+              onChange={handleInputChange('numCodes')}
+              placeholder="Ej: 10"
+              inputProps={{ min: 1, max: 50 }}
+              size="small"
+              sx={{ width: 120 }}
+              helperText="Deja vacío para automático"
+            />
           </Box>
         </Box>
 

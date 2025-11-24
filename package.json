@@ -17,6 +17,7 @@
     "react-router-dom": "^7.6.3",
     "react-scripts": "5.0.1",
     "react-tag-input": "^6.10.6",
+    "recharts": "^3.4.1",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5"
   },

@@ -16,6 +16,7 @@ import Summary from './pages/Summary';
 import EmbeddingsView from './pages/EmbeddingsView';
 import Survey from './pages/Survey';
 import Taxonomy from './pages/Taxonomy';
+import ClusteringComparison from './pages/ClusteringComparison';
 import { Box } from '@mui/material';
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
               <Route path="/tutorial" element={<TutorialInteractivo />} />
               <Route path="/taxonomy" element={<Taxonomy />} />
               <Route path="/survey" element={<Survey />} />
+              <Route path="/clustering-comparison" element={<ClusteringComparison />} />
             </>
           )}
           {!session && <Route path="*" element={<Navigate to="/" />} />}

@@ -82,7 +82,8 @@ function Step2Generar() {
             max_tokens: hyperparams.maxTokens || 1000,
             top_p: hyperparams.topP || 1.0,
             frequency_penalty: hyperparams.frequencyPenalty || 0.0,
-            presence_penalty: hyperparams.presencePenalty || 0.0
+            presence_penalty: hyperparams.presencePenalty || 0.0,
+            ...(hyperparams.numCodes && { num_codes: hyperparams.numCodes })
           })
         });
 
@@ -122,7 +123,10 @@ function Step2Generar() {
   const handleAnterior = () => navigate("/step1");
   const handleRegenerar = () => {
     setCodigos([]);
+    setCodigosSinHipotesis([]);
     setError('');
+    localStorage.removeItem('codigos');
+    localStorage.removeItem('codigos_sin_hipotesis');
     // Re-trigger the effect
     setPreguntas([...preguntas]);
   };
